@@ -17,3 +17,4 @@ linter:
     lines_longer_than_80_chars: false
     public_member_api_docs: false
     avoid_redundant_argument_values: false
+    one_member_abstracts: false

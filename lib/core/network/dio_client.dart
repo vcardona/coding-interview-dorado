@@ -1,4 +1,5 @@
 import 'package:coding_interview_dorado/core/constants/api_constants.dart';
+import 'package:coding_interview_dorado/features/currency_exchange/data/datasources/currency_api_client.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
@@ -24,4 +25,7 @@ abstract class DioModule {
 
     return dio;
   }
+
+  @lazySingleton
+  CurrencyApiClient currencyApiClient(Dio dio) => CurrencyApiClient(dio);
 }
