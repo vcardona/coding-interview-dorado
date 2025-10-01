@@ -2,6 +2,7 @@ import 'package:coding_interview_dorado/features/currency_exchange/presentation/
 import 'package:coding_interview_dorado/features/currency_exchange/presentation/widgets/amount_input_widget.dart';
 import 'package:coding_interview_dorado/features/currency_exchange/presentation/widgets/currency_bottom_sheet.dart';
 import 'package:coding_interview_dorado/features/currency_exchange/presentation/widgets/currency_selector_widget.dart';
+import 'package:coding_interview_dorado/features/currency_exchange/presentation/widgets/decorative_background.dart';
 import 'package:coding_interview_dorado/shared/theme/app_colors.dart';
 import 'package:coding_interview_dorado/shared/theme/app_text_styles.dart';
 import 'package:flutter/material.dart';
@@ -33,15 +34,20 @@ class _CurrencyExchangePageState extends ConsumerState<CurrencyExchangePage> {
       appBar: AppBar(
         title: const Text('Currency Exchange'),
       ),
-      body: SafeArea(
-        child: Center(
-          child: Padding(
-            padding: const EdgeInsets.all(24),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                // Main Card
-                Card(
+      body: Stack(
+        children: [
+          // Decorative background
+          const DecorativeBackground(),
+          // Main content
+          SafeArea(
+            child: Center(
+              child: Padding(
+                padding: const EdgeInsets.all(24),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    // Main Card
+                    Card(
                   child: Padding(
                     padding: const EdgeInsets.all(24),
                     child: Column(
@@ -164,13 +170,15 @@ class _CurrencyExchangePageState extends ConsumerState<CurrencyExchangePage> {
                         child: const Text('Cambiar'),
                       ),
                     ],
+                    ),
                   ),
                 ),
+                ],
               ),
-              ],
             ),
           ),
         ),
+        ],
       ),
     );
   }
