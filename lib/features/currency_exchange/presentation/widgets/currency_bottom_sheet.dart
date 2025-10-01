@@ -49,14 +49,14 @@ class CurrencyBottomSheet extends StatelessWidget {
           ),
           const SizedBox(height: AppSpacing.lg),
           Flexible(
-            child: ListView.separated(
+            child: ListView.builder(
               shrinkWrap: true,
               itemCount: currencies.length,
-              separatorBuilder: (context, index) => const Divider(height: 1),
               itemBuilder: (context, index) {
                 final currency = currencies[index];
                 final code = currency['code']!;
                 final name = currency['name']!;
+                final icon = currency['icon']!;
                 final isSelected = code == selectedCurrency;
 
                 return ListTile(
@@ -66,25 +66,55 @@ class CurrencyBottomSheet extends StatelessWidget {
                   },
                   contentPadding: const EdgeInsets.symmetric(
                     horizontal: AppSpacing.lg,
-                    vertical: AppSpacing.sm,
+                    vertical: AppSpacing.md,
+                  ),
+                  leading: Image.asset(
+                    icon,
+                    width: 40,
+                    height: 40,
+                    errorBuilder: (context, error, stackTrace) {
+                      return Container(
+                        width: 40,
+                        height: 40,
+                        decoration: BoxDecoration(
+                          color: AppColors.border,
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                      );
+                    },
                   ),
                   title: Text(
                     code,
                     style: AppTextStyles.bodyLarge.copyWith(
-                      fontWeight: isSelected ? FontWeight.bold : null,
-                      color: isSelected ? AppColors.primary : null,
+                      fontWeight: FontWeight.bold,
+                      color: isSelected ? AppColors.primary : AppColors.textPrimary,
                     ),
                   ),
                   subtitle: Text(
                     name,
-                    style: AppTextStyles.bodyMedium,
+                    style: AppTextStyles.bodyMedium.copyWith(
+                      color: AppColors.textSecondary,
+                    ),
                   ),
-                  trailing: isSelected
-                      ? const Icon(
-                          Icons.check_circle,
-                          color: AppColors.primary,
-                        )
-                      : null,
+                  trailing: Container(
+                    width: 24,
+                    height: 24,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(
+                        color: isSelected ? AppColors.primary : AppColors.border,
+                        width: 2,
+                      ),
+                      color: isSelected ? AppColors.primary : Colors.transparent,
+                    ),
+                    child: isSelected
+                        ? const Icon(
+                            Icons.check,
+                            size: 16,
+                            color: AppColors.white,
+                          )
+                        : null,
+                  ),
                 );
               },
             ),

@@ -12,8 +12,7 @@ class CurrencyExchangePage extends ConsumerStatefulWidget {
   const CurrencyExchangePage({super.key});
 
   @override
-  ConsumerState<CurrencyExchangePage> createState() =>
-      _CurrencyExchangePageState();
+  ConsumerState<CurrencyExchangePage> createState() => _CurrencyExchangePageState();
 }
 
 class _CurrencyExchangePageState extends ConsumerState<CurrencyExchangePage> {
@@ -48,136 +47,129 @@ class _CurrencyExchangePageState extends ConsumerState<CurrencyExchangePage> {
                   children: [
                     // Main Card
                     Card(
-                  child: Padding(
-                    padding: const EdgeInsets.all(24),
-                    child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      // Currency Selector
-                      state.maybeWhen(
-                        orElse: () => CurrencySelectorWidget(
-                          fromCurrency: 'USDT',
-                          toCurrency: 'VES',
-                          onFromCurrencyTap: _showFromCurrencyPicker,
-                          onToCurrencyTap: _showToCurrencyPicker,
-                          onSwap: _handleSwap,
-                        ),
-                        initial: (from, to, amount) => CurrencySelectorWidget(
-                          fromCurrency: from,
-                          toCurrency: to,
-                          onFromCurrencyTap: () =>
-                              _showFromCurrencyPicker(from),
-                          onToCurrencyTap: () => _showToCurrencyPicker(to),
-                          onSwap: _handleSwap,
-                        ),
-                        loading: (from, to, amount) => CurrencySelectorWidget(
-                          fromCurrency: from,
-                          toCurrency: to,
-                          onFromCurrencyTap: () =>
-                              _showFromCurrencyPicker(from),
-                          onToCurrencyTap: () => _showToCurrencyPicker(to),
-                          onSwap: _handleSwap,
-                        ),
-                        success: (from, to, amount, rate) =>
-                            CurrencySelectorWidget(
-                          fromCurrency: from,
-                          toCurrency: to,
-                          onFromCurrencyTap: () =>
-                              _showFromCurrencyPicker(from),
-                          onToCurrencyTap: () => _showToCurrencyPicker(to),
-                          onSwap: _handleSwap,
-                        ),
-                        error: (from, to, amount, message) =>
-                            CurrencySelectorWidget(
-                          fromCurrency: from,
-                          toCurrency: to,
-                          onFromCurrencyTap: () =>
-                              _showFromCurrencyPicker(from),
-                          onToCurrencyTap: () => _showToCurrencyPicker(to),
-                          onSwap: _handleSwap,
-                        ),
-                      ),
-                      const SizedBox(height: 24),
-                      // Amount Input
-                      state.maybeWhen(
-                        orElse: () => AmountInputWidget(
-                          controller: _amountController,
-                          currencyCode: 'USDT',
-                          onChanged: _handleAmountChanged,
-                        ),
-                        initial: (from, to, amount) => AmountInputWidget(
-                          controller: _amountController,
-                          currencyCode: from,
-                          onChanged: _handleAmountChanged,
-                        ),
-                        loading: (from, to, amount) => AmountInputWidget(
-                          controller: _amountController,
-                          currencyCode: from,
-                          onChanged: _handleAmountChanged,
-                        ),
-                        success: (from, to, amount, rate) => AmountInputWidget(
-                          controller: _amountController,
-                          currencyCode: from,
-                          onChanged: _handleAmountChanged,
-                        ),
-                        error: (from, to, amount, message) => AmountInputWidget(
-                          controller: _amountController,
-                          currencyCode: from,
-                          onChanged: _handleAmountChanged,
-                        ),
-                      ),
-                      const SizedBox(height: 24),
-                      // Results Section
-                      state.maybeWhen(
-                        success: (from, to, amount, rate) => Column(
+                      child: Padding(
+                        padding: const EdgeInsets.all(24),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
-                            _ResultRow(
-                              label: 'Tasa estimada',
-                              value: '≈ ${rate.rate.toStringAsFixed(2)} $to',
+                            // Currency Selector
+                            state.maybeWhen(
+                              orElse: () => CurrencySelectorWidget(
+                                fromCurrency: 'USDT',
+                                toCurrency: 'VES',
+                                onFromCurrencyTap: _showFromCurrencyPicker,
+                                onToCurrencyTap: _showToCurrencyPicker,
+                                onSwap: _handleSwap,
+                              ),
+                              initial: (from, to, amount) => CurrencySelectorWidget(
+                                fromCurrency: from,
+                                toCurrency: to,
+                                onFromCurrencyTap: () => _showFromCurrencyPicker(from),
+                                onToCurrencyTap: () => _showToCurrencyPicker(to),
+                                onSwap: _handleSwap,
+                              ),
+                              loading: (from, to, amount) => CurrencySelectorWidget(
+                                fromCurrency: from,
+                                toCurrency: to,
+                                onFromCurrencyTap: () => _showFromCurrencyPicker(from),
+                                onToCurrencyTap: () => _showToCurrencyPicker(to),
+                                onSwap: _handleSwap,
+                              ),
+                              success: (from, to, amount, rate) => CurrencySelectorWidget(
+                                fromCurrency: from,
+                                toCurrency: to,
+                                onFromCurrencyTap: () => _showFromCurrencyPicker(from),
+                                onToCurrencyTap: () => _showToCurrencyPicker(to),
+                                onSwap: _handleSwap,
+                              ),
+                              error: (from, to, amount, message) => CurrencySelectorWidget(
+                                fromCurrency: from,
+                                toCurrency: to,
+                                onFromCurrencyTap: () => _showFromCurrencyPicker(from),
+                                onToCurrencyTap: () => _showToCurrencyPicker(to),
+                                onSwap: _handleSwap,
+                              ),
                             ),
-                            const SizedBox(height: 16),
-                            _ResultRow(
-                              label: 'Recibirás',
-                              value:
-                                  '≈ ${rate.convertedAmount.toStringAsFixed(2)} $to',
+                            const SizedBox(height: 24),
+                            // Amount Input
+                            state.maybeWhen(
+                              orElse: () => AmountInputWidget(
+                                controller: _amountController,
+                                currencyCode: 'USDT',
+                                onChanged: _handleAmountChanged,
+                              ),
+                              initial: (from, to, amount) => AmountInputWidget(
+                                controller: _amountController,
+                                currencyCode: from,
+                                onChanged: _handleAmountChanged,
+                              ),
+                              loading: (from, to, amount) => AmountInputWidget(
+                                controller: _amountController,
+                                currencyCode: from,
+                                onChanged: _handleAmountChanged,
+                              ),
+                              success: (from, to, amount, rate) => AmountInputWidget(
+                                controller: _amountController,
+                                currencyCode: from,
+                                onChanged: _handleAmountChanged,
+                              ),
+                              error: (from, to, amount, message) => AmountInputWidget(
+                                controller: _amountController,
+                                currencyCode: from,
+                                onChanged: _handleAmountChanged,
+                              ),
                             ),
-                            const SizedBox(height: 16),
-                            _ResultRow(
-                              label: 'Tiempo estimado',
-                              value: rate.estimatedTime,
+                            const SizedBox(height: 24),
+                            // Results Section
+                            state.maybeWhen(
+                              success: (from, to, amount, rate) => Column(
+                                children: [
+                                  _ResultRow(
+                                    label: 'Tasa estimada',
+                                    value: '≈ ${rate.rate.toStringAsFixed(2)} $to',
+                                  ),
+                                  const SizedBox(height: 16),
+                                  _ResultRow(
+                                    label: 'Recibirás',
+                                    value: '≈ ${rate.convertedAmount.toStringAsFixed(2)} $to',
+                                  ),
+                                  const SizedBox(height: 16),
+                                  _ResultRow(
+                                    label: 'Tiempo estimado',
+                                    value: rate.estimatedTime,
+                                  ),
+                                ],
+                              ),
+                              loading: (from, to, amount) => const Center(
+                                child: CircularProgressIndicator(),
+                              ),
+                              error: (from, to, amount, message) => Text(
+                                message,
+                                style: AppTextStyles.bodyMedium.copyWith(
+                                  color: AppColors.error,
+                                ),
+                              ),
+                              orElse: () => const SizedBox.shrink(),
+                            ),
+                            const SizedBox(height: 32),
+                            // Action Button
+                            ElevatedButton(
+                              onPressed: () {
+                                ref
+                                    .read(currencyExchangeNotifierProvider.notifier)
+                                    .getExchangeRate();
+                              },
+                              child: const Text('Cambiar'),
                             ),
                           ],
                         ),
-                        loading: (from, to, amount) => const Center(
-                          child: CircularProgressIndicator(),
-                        ),
-                        error: (from, to, amount, message) => Text(
-                          message,
-                          style: AppTextStyles.bodyMedium.copyWith(
-                            color: AppColors.error,
-                          ),
-                        ),
-                        orElse: () => const SizedBox.shrink(),
                       ),
-                      const SizedBox(height: 32),
-                      // Action Button
-                      ElevatedButton(
-                        onPressed: () {
-                          ref
-                              .read(currencyExchangeNotifierProvider.notifier)
-                              .getExchangeRate();
-                        },
-                        child: const Text('Cambiar'),
-                      ),
-                    ],
                     ),
-                  ),
+                  ],
                 ),
-                ],
               ),
             ),
           ),
-        ),
         ],
       ),
     );
@@ -193,9 +185,7 @@ class _CurrencyExchangePageState extends ConsumerState<CurrencyExchangePage> {
       isCrypto: isCrypto,
       selectedCurrency: currentCurrency,
       onCurrencySelected: (currency) {
-        ref
-            .read(currencyExchangeNotifierProvider.notifier)
-            .setFromCurrency(currency);
+        ref.read(currencyExchangeNotifierProvider.notifier).setFromCurrency(currency);
       },
     );
   }
@@ -206,13 +196,11 @@ class _CurrencyExchangePageState extends ConsumerState<CurrencyExchangePage> {
 
     CurrencyBottomSheet.show(
       context: context,
-      title: 'Selecciona moneda de destino',
+      title: 'FIAT',
       isCrypto: isCrypto,
       selectedCurrency: currentCurrency,
       onCurrencySelected: (currency) {
-        ref
-            .read(currencyExchangeNotifierProvider.notifier)
-            .setToCurrency(currency);
+        ref.read(currencyExchangeNotifierProvider.notifier).setToCurrency(currency);
       },
     );
   }
