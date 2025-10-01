@@ -181,7 +181,7 @@ class _CurrencyExchangePageState extends ConsumerState<CurrencyExchangePage> {
 
     CurrencyBottomSheet.show(
       context: context,
-      title: 'Selecciona moneda de origen',
+      title: 'Cripto',
       isCrypto: isCrypto,
       selectedCurrency: currentCurrency,
       onCurrencySelected: (currency) {

@@ -18,6 +18,18 @@ class CurrencySelectorWidget extends StatelessWidget {
   final VoidCallback onToCurrencyTap;
   final VoidCallback onSwap;
 
+  String _getCurrencyIcon(String currencyCode) {
+    final icons = {
+      'USDT': 'assets/cripto_currencies/TATUM-TRON-USDT.png',
+      'USDC': 'assets/cripto_currencies/USDC.png',
+      'VES': 'assets/fiat_currencies/VES.png',
+      'COP': 'assets/fiat_currencies/COP.png',
+      'PEN': 'assets/fiat_currencies/PEN.png',
+      'BRL': 'assets/fiat_currencies/BRL.png',
+    };
+    return icons[currencyCode] ?? 'assets/fiat_currencies/VES.png';
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -39,11 +51,23 @@ class CurrencySelectorWidget extends StatelessWidget {
                 topLeft: Radius.circular(26),
                 bottomLeft: Radius.circular(26),
               ),
-              child: Center(
-                child: Text(
-                  fromCurrency,
-                  style: AppTextStyles.currencyCode,
-                ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    _getCurrencyIcon(fromCurrency),
+                    width: 24,
+                    height: 24,
+                    errorBuilder: (context, error, stackTrace) {
+                      return const SizedBox(width: 24, height: 24);
+                    },
+                  ),
+                  const SizedBox(width: 8),
+                  Text(
+                    fromCurrency,
+                    style: AppTextStyles.currencyCode,
+                  ),
+                ],
               ),
             ),
           ),
@@ -70,11 +94,23 @@ class CurrencySelectorWidget extends StatelessWidget {
                 topRight: Radius.circular(26),
                 bottomRight: Radius.circular(26),
               ),
-              child: Center(
-                child: Text(
-                  toCurrency,
-                  style: AppTextStyles.currencyCode,
-                ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    _getCurrencyIcon(toCurrency),
+                    width: 24,
+                    height: 24,
+                    errorBuilder: (context, error, stackTrace) {
+                      return const SizedBox(width: 24, height: 24);
+                    },
+                  ),
+                  const SizedBox(width: 8),
+                  Text(
+                    toCurrency,
+                    style: AppTextStyles.currencyCode,
+                  ),
+                ],
               ),
             ),
           ),
