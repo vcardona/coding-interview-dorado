@@ -1,14 +1,31 @@
 import 'package:coding_interview_dorado/features/currency_exchange/presentation/providers/currency_exchange_provider.dart';
+import 'package:coding_interview_dorado/features/currency_exchange/presentation/widgets/amount_input_widget.dart';
+import 'package:coding_interview_dorado/features/currency_exchange/presentation/widgets/currency_bottom_sheet.dart';
+import 'package:coding_interview_dorado/features/currency_exchange/presentation/widgets/currency_selector_widget.dart';
 import 'package:coding_interview_dorado/shared/theme/app_colors.dart';
 import 'package:coding_interview_dorado/shared/theme/app_text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class CurrencyExchangePage extends ConsumerWidget {
+class CurrencyExchangePage extends ConsumerStatefulWidget {
   const CurrencyExchangePage({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<CurrencyExchangePage> createState() =>
+      _CurrencyExchangePageState();
+}
+
+class _CurrencyExchangePageState extends ConsumerState<CurrencyExchangePage> {
+  final _amountController = TextEditingController();
+
+  @override
+  void dispose() {
+    _amountController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final state = ref.watch(currencyExchangeNotifierProvider);
 
     return Scaffold(
@@ -28,104 +45,78 @@ class CurrencyExchangePage extends ConsumerWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      // Currency Selector Row - Placeholder
-                      Container(
-                        height: 56,
-                        decoration: BoxDecoration(
-                          color: AppColors.white,
-                          borderRadius: BorderRadius.circular(28),
-                          border: Border.all(
-                            color: AppColors.borderFocused,
-                            width: 2,
-                          ),
+                      // Currency Selector
+                      state.maybeWhen(
+                        orElse: () => CurrencySelectorWidget(
+                          fromCurrency: 'USDT',
+                          toCurrency: 'VES',
+                          onFromCurrencyTap: _showFromCurrencyPicker,
+                          onToCurrencyTap: _showToCurrencyPicker,
+                          onSwap: _handleSwap,
                         ),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: Center(
-                                child: state.maybeWhen(
-                                  orElse: () => const Text(
-                                    'USDT',
-                                    style: AppTextStyles.currencyCode,
-                                  ),
-                                  initial: (from, to, amount) => Text(
-                                    from,
-                                    style: AppTextStyles.currencyCode,
-                                  ),
-                                  loading: (from, to, amount) => Text(
-                                    from,
-                                    style: AppTextStyles.currencyCode,
-                                  ),
-                                  success: (from, to, amount, rate) => Text(
-                                    from,
-                                    style: AppTextStyles.currencyCode,
-                                  ),
-                                  error: (from, to, amount, message) => Text(
-                                    from,
-                                    style: AppTextStyles.currencyCode,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Container(
-                              width: 48,
-                              height: 48,
-                              decoration: const BoxDecoration(
-                                color: AppColors.primary,
-                                shape: BoxShape.circle,
-                              ),
-                              child: const Icon(
-                                Icons.swap_horiz,
-                                color: AppColors.white,
-                              ),
-                            ),
-                            Expanded(
-                              child: Center(
-                                child: state.maybeWhen(
-                                  orElse: () => const Text(
-                                    'VES',
-                                    style: AppTextStyles.currencyCode,
-                                  ),
-                                  initial: (from, to, amount) => Text(
-                                    to,
-                                    style: AppTextStyles.currencyCode,
-                                  ),
-                                  loading: (from, to, amount) => Text(
-                                    to,
-                                    style: AppTextStyles.currencyCode,
-                                  ),
-                                  success: (from, to, amount, rate) => Text(
-                                    to,
-                                    style: AppTextStyles.currencyCode,
-                                  ),
-                                  error: (from, to, amount, message) => Text(
-                                    to,
-                                    style: AppTextStyles.currencyCode,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
+                        initial: (from, to, amount) => CurrencySelectorWidget(
+                          fromCurrency: from,
+                          toCurrency: to,
+                          onFromCurrencyTap: () =>
+                              _showFromCurrencyPicker(from),
+                          onToCurrencyTap: () => _showToCurrencyPicker(to),
+                          onSwap: _handleSwap,
+                        ),
+                        loading: (from, to, amount) => CurrencySelectorWidget(
+                          fromCurrency: from,
+                          toCurrency: to,
+                          onFromCurrencyTap: () =>
+                              _showFromCurrencyPicker(from),
+                          onToCurrencyTap: () => _showToCurrencyPicker(to),
+                          onSwap: _handleSwap,
+                        ),
+                        success: (from, to, amount, rate) =>
+                            CurrencySelectorWidget(
+                          fromCurrency: from,
+                          toCurrency: to,
+                          onFromCurrencyTap: () =>
+                              _showFromCurrencyPicker(from),
+                          onToCurrencyTap: () => _showToCurrencyPicker(to),
+                          onSwap: _handleSwap,
+                        ),
+                        error: (from, to, amount, message) =>
+                            CurrencySelectorWidget(
+                          fromCurrency: from,
+                          toCurrency: to,
+                          onFromCurrencyTap: () =>
+                              _showFromCurrencyPicker(from),
+                          onToCurrencyTap: () => _showToCurrencyPicker(to),
+                          onSwap: _handleSwap,
                         ),
                       ),
                       const SizedBox(height: 24),
-                      // Amount Input - Placeholder
-                      TextField(
-                        decoration: InputDecoration(
-                          hintText: '0.00',
-                          prefixText: state.maybeWhen(
-                            orElse: () => 'USDT ',
-                            initial: (from, to, amount) => '$from ',
-                            loading: (from, to, amount) => '$from ',
-                            success: (from, to, amount, rate) => '$from ',
-                            error: (from, to, amount, message) => '$from ',
-                          ),
-                          prefixStyle: AppTextStyles.currencyCodeLarge,
+                      // Amount Input
+                      state.maybeWhen(
+                        orElse: () => AmountInputWidget(
+                          controller: _amountController,
+                          currencyCode: 'USDT',
+                          onChanged: _handleAmountChanged,
                         ),
-                        keyboardType: const TextInputType.numberWithOptions(
-                          decimal: true,
+                        initial: (from, to, amount) => AmountInputWidget(
+                          controller: _amountController,
+                          currencyCode: from,
+                          onChanged: _handleAmountChanged,
                         ),
-                        style: AppTextStyles.amount,
+                        loading: (from, to, amount) => AmountInputWidget(
+                          controller: _amountController,
+                          currencyCode: from,
+                          onChanged: _handleAmountChanged,
+                        ),
+                        success: (from, to, amount, rate) => AmountInputWidget(
+                          controller: _amountController,
+                          currencyCode: from,
+                          onChanged: _handleAmountChanged,
+                        ),
+                        error: (from, to, amount, message) => AmountInputWidget(
+                          controller: _amountController,
+                          currencyCode: from,
+                          onChanged: _handleAmountChanged,
+                        ),
                       ),
                       const SizedBox(height: 24),
                       // Results Section
@@ -179,6 +170,49 @@ class CurrencyExchangePage extends ConsumerWidget {
         ),
       ),
     );
+  }
+
+  void _showFromCurrencyPicker([String currentCurrency = 'USDT']) {
+    // Determine if current FROM currency is crypto
+    final isCrypto = currentCurrency == 'USDT' || currentCurrency == 'USDC';
+
+    CurrencyBottomSheet.show(
+      context: context,
+      title: 'Selecciona moneda de origen',
+      isCrypto: isCrypto,
+      selectedCurrency: currentCurrency,
+      onCurrencySelected: (currency) {
+        ref
+            .read(currencyExchangeNotifierProvider.notifier)
+            .setFromCurrency(currency);
+      },
+    );
+  }
+
+  void _showToCurrencyPicker([String currentCurrency = 'VES']) {
+    // Determine if current TO currency is crypto
+    final isCrypto = currentCurrency == 'USDT' || currentCurrency == 'USDC';
+
+    CurrencyBottomSheet.show(
+      context: context,
+      title: 'Selecciona moneda de destino',
+      isCrypto: isCrypto,
+      selectedCurrency: currentCurrency,
+      onCurrencySelected: (currency) {
+        ref
+            .read(currencyExchangeNotifierProvider.notifier)
+            .setToCurrency(currency);
+      },
+    );
+  }
+
+  void _handleSwap() {
+    ref.read(currencyExchangeNotifierProvider.notifier).swapCurrencies();
+  }
+
+  void _handleAmountChanged(String value) {
+    final amount = double.tryParse(value) ?? 0.0;
+    ref.read(currencyExchangeNotifierProvider.notifier).setAmount(amount);
   }
 }
 
