@@ -40,7 +40,7 @@ class AppTextStyles {
   static const TextStyle currencyCodeLarge = TextStyle(
     fontSize: 18,
     fontWeight: FontWeight.w700,
-    color: AppColors.textPrimary,
+    color: AppColors.primary,
   );
 
   static const TextStyle amount = TextStyle(

@@ -20,8 +20,13 @@ class AmountInputWidget extends StatelessWidget {
       controller: controller,
       decoration: InputDecoration(
         hintText: '0.00',
-        prefixText: '$currencyCode ',
-        prefixStyle: AppTextStyles.currencyCodeLarge,
+        prefix: Padding(
+          padding: const EdgeInsets.only(right: 8),
+          child: Text(
+            currencyCode,
+            style: AppTextStyles.currencyCodeLarge,
+          ),
+        ),
       ),
       keyboardType: const TextInputType.numberWithOptions(
         decimal: true,
