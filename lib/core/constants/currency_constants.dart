@@ -30,10 +30,35 @@ class CurrencyConstants {
 
   static const List<Map<String, String>> cryptoCurrencies = [
     {
-      'id': 'USDT',
+      'id': 'TATUM-TRON-USDT',
       'code': 'USDT',
       'name': 'Tether (USDT)',
       'icon': 'assets/cripto_currencies/TATUM-TRON-USDT.png',
     },
   ];
+
+  /// Get API ID from display code
+  static String getApiId(String displayCode) {
+    // Check crypto currencies
+    for (final crypto in cryptoCurrencies) {
+      if (crypto['code'] == displayCode) {
+        return crypto['id']!;
+      }
+    }
+
+    // Check fiat currencies
+    for (final fiat in fiatCurrencies) {
+      if (fiat['code'] == displayCode) {
+        return fiat['id']!;
+      }
+    }
+
+    // Return the display code if not found
+    return displayCode;
+  }
+
+  /// Check if currency is crypto
+  static bool isCrypto(String displayCode) {
+    return cryptoCurrencies.any((crypto) => crypto['code'] == displayCode);
+  }
 }

@@ -26,8 +26,16 @@ class CurrencyRepositoryImpl implements CurrencyRepository {
         amountCurrencyId: amountCurrencyId,
       );
 
+      // Validate response data
+      if (response.data.byPrice == null ||
+          response.data.byPrice!.fiatToCryptoExchangeRate == null) {
+        throw Exception(
+          'No hay tasas de cambio disponibles para esta combinación de monedas',
+        );
+      }
+
       // Calculate converted amount based on the exchange rate
-      final rate = response.data.byPrice.fiatToCryptoExchangeRate;
+      final rate = response.data.byPrice!.fiatToCryptoExchangeRate!;
       final convertedAmount = type == 0
           ? amount / rate // CRYPTO to FIAT
           : amount * rate; // FIAT to CRYPTO

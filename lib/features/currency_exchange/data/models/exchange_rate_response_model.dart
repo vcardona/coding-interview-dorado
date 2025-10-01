@@ -16,7 +16,7 @@ class ExchangeRateResponseModel with _$ExchangeRateResponseModel {
 @freezed
 class ExchangeRateDataModel with _$ExchangeRateDataModel {
   const factory ExchangeRateDataModel({
-    required ByPriceModel byPrice,
+    ByPriceModel? byPrice,
   }) = _ExchangeRateDataModel;
 
   factory ExchangeRateDataModel.fromJson(Map<String, dynamic> json) =>
@@ -26,7 +26,7 @@ class ExchangeRateDataModel with _$ExchangeRateDataModel {
 @freezed
 class ByPriceModel with _$ByPriceModel {
   const factory ByPriceModel({
-    required double fiatToCryptoExchangeRate,
+    double? fiatToCryptoExchangeRate,
   }) = _ByPriceModel;
 
   factory ByPriceModel.fromJson(Map<String, dynamic> json) =>

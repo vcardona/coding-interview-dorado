@@ -1,4 +1,5 @@
 import 'package:coding_interview_dorado/core/constants/api_constants.dart';
+import 'package:coding_interview_dorado/core/constants/currency_constants.dart';
 import 'package:coding_interview_dorado/features/currency_exchange/data/datasources/currency_api_client.dart';
 import 'package:coding_interview_dorado/features/currency_exchange/data/datasources/currency_remote_datasource.dart';
 import 'package:coding_interview_dorado/features/currency_exchange/data/repositories/currency_repository_impl.dart';
@@ -172,21 +173,25 @@ class CurrencyExchangeNotifier extends _$CurrencyExchangeNotifier {
     try {
       final useCase = ref.read(getExchangeRateUseCaseProvider);
 
-      // Determine type and currency IDs
-      // Assuming USDT and USDC are crypto, others are fiat
-      final isCryptoList = ['USDT', 'USDC'];
-      final isFromCrypto = isCryptoList.contains(fromCurrency);
+      // Determine type and currency IDs using CurrencyConstants
+      final isFromCrypto = CurrencyConstants.isCrypto(fromCurrency);
 
       final type = isFromCrypto ? 0 : 1; // 0: CRYPTO->FIAT, 1: FIAT->CRYPTO
-      final cryptoCurrencyId = isFromCrypto ? fromCurrency : toCurrency;
-      final fiatCurrencyId = isFromCrypto ? toCurrency : fromCurrency;
+
+      // Get the actual API IDs (e.g., USDT -> TATUM-TRON-USDT)
+      final cryptoCurrencyCode = isFromCrypto ? fromCurrency : toCurrency;
+      final fiatCurrencyCode = isFromCrypto ? toCurrency : fromCurrency;
+
+      final cryptoCurrencyId = CurrencyConstants.getApiId(cryptoCurrencyCode);
+      final fiatCurrencyId = CurrencyConstants.getApiId(fiatCurrencyCode);
+      final amountCurrencyId = CurrencyConstants.getApiId(fromCurrency);
 
       final result = await useCase.call(
         type: type,
         cryptoCurrencyId: cryptoCurrencyId,
         fiatCurrencyId: fiatCurrencyId,
         amount: amount,
-        amountCurrencyId: fromCurrency,
+        amountCurrencyId: amountCurrencyId,
       );
 
       state = CurrencyExchangeState.success(
