@@ -1,3 +1,4 @@
+import 'package:coding_interview_dorado/l10n/app_localizations.dart';
 import 'package:coding_interview_dorado/shared/theme/app_text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -16,10 +17,12 @@ class AmountInputWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     return TextField(
       controller: controller,
       decoration: InputDecoration(
-        hintText: '0.00',
+        hintText: l10n.amountHint,
         prefix: Padding(
           padding: const EdgeInsets.only(right: 8),
           child: Text(

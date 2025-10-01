@@ -1,3 +1,4 @@
+import 'package:coding_interview_dorado/l10n/app_localizations.dart';
 import 'package:coding_interview_dorado/shared/theme/app_colors.dart';
 import 'package:coding_interview_dorado/shared/theme/app_text_styles.dart';
 import 'package:flutter/material.dart';
@@ -32,6 +33,8 @@ class CurrencySelectorWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     return Column(
       children: [
         // Labels row
@@ -41,7 +44,7 @@ class CurrencySelectorWidget extends StatelessWidget {
             children: [
               Expanded(
                 child: Text(
-                  'TENGO',
+                  l10n.tengo,
                   textAlign: TextAlign.center,
                   style: AppTextStyles.labelMedium.copyWith(
                     color: AppColors.textSecondary,
@@ -53,7 +56,7 @@ class CurrencySelectorWidget extends StatelessWidget {
               const SizedBox(width: 48), // Space for swap button
               Expanded(
                 child: Text(
-                  'QUIERO',
+                  l10n.quiero,
                   textAlign: TextAlign.center,
                   style: AppTextStyles.labelMedium.copyWith(
                     color: AppColors.textSecondary,

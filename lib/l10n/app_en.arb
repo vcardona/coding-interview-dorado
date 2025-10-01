@@ -1,0 +1,20 @@
+{
+  "@@locale": "en",
+  "appTitle": "Currency Exchange",
+  "tengo": "I HAVE",
+  "quiero": "I WANT",
+  "amountHint": "0.00",
+  "estimatedRate": "Estimated rate",
+  "youWillReceive": "You will receive",
+  "estimatedTime": "Estimated time",
+  "exchangeButton": "Exchange",
+  "selectCryptoCurrency": "Crypto",
+  "selectFiatCurrency": "FIAT",
+  "errorFetchingRate": "Error fetching exchange rate",
+  "serverError": "Server error ({statusCode}). Please try again.",
+  "connectionTimeout": "Connection timeout. Check your connection.",
+  "connectionError": "Connection error. Check your network.",
+  "invalidAmount": "Please enter a valid amount",
+  "noRatesAvailable": "No exchange rates available for this currency pair",
+  "approximateSymbol": "≈"
+}

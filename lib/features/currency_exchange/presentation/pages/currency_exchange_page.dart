@@ -3,6 +3,7 @@ import 'package:coding_interview_dorado/features/currency_exchange/presentation/
 import 'package:coding_interview_dorado/features/currency_exchange/presentation/widgets/currency_bottom_sheet.dart';
 import 'package:coding_interview_dorado/features/currency_exchange/presentation/widgets/currency_selector_widget.dart';
 import 'package:coding_interview_dorado/features/currency_exchange/presentation/widgets/decorative_background.dart';
+import 'package:coding_interview_dorado/l10n/app_localizations.dart';
 import 'package:coding_interview_dorado/shared/theme/app_colors.dart';
 import 'package:coding_interview_dorado/shared/theme/app_text_styles.dart';
 import 'package:flutter/material.dart';
@@ -27,11 +28,12 @@ class _CurrencyExchangePageState extends ConsumerState<CurrencyExchangePage> {
   @override
   Widget build(BuildContext context) {
     final state = ref.watch(currencyExchangeNotifierProvider);
+    final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
       backgroundColor: AppColors.backgroundLight,
       appBar: AppBar(
-        title: const Text('Currency Exchange'),
+        title: Text(l10n.appTitle),
       ),
       body: Stack(
         children: [
@@ -125,17 +127,17 @@ class _CurrencyExchangePageState extends ConsumerState<CurrencyExchangePage> {
                               success: (from, to, amount, rate) => Column(
                                 children: [
                                   _ResultRow(
-                                    label: 'Tasa estimada',
-                                    value: '≈ ${rate.rate.toStringAsFixed(2)} $to',
+                                    label: l10n.estimatedRate,
+                                    value: '${l10n.approximateSymbol} ${rate.rate.toStringAsFixed(2)} $to',
                                   ),
                                   const SizedBox(height: 16),
                                   _ResultRow(
-                                    label: 'Recibirás',
-                                    value: '≈ ${rate.convertedAmount.toStringAsFixed(2)} $to',
+                                    label: l10n.youWillReceive,
+                                    value: '${l10n.approximateSymbol} ${rate.convertedAmount.toStringAsFixed(2)} $to',
                                   ),
                                   const SizedBox(height: 16),
                                   _ResultRow(
-                                    label: 'Tiempo estimado',
+                                    label: l10n.estimatedTime,
                                     value: rate.estimatedTime,
                                   ),
                                 ],
@@ -159,7 +161,7 @@ class _CurrencyExchangePageState extends ConsumerState<CurrencyExchangePage> {
                                     .read(currencyExchangeNotifierProvider.notifier)
                                     .getExchangeRate();
                               },
-                              child: const Text('Cambiar'),
+                              child: Text(l10n.exchangeButton),
                             ),
                           ],
                         ),
@@ -178,10 +180,11 @@ class _CurrencyExchangePageState extends ConsumerState<CurrencyExchangePage> {
   void _showFromCurrencyPicker([String currentCurrency = 'USDT']) {
     // Determine if current FROM currency is crypto
     final isCrypto = currentCurrency == 'USDT' || currentCurrency == 'USDC';
+    final l10n = AppLocalizations.of(context)!;
 
     CurrencyBottomSheet.show(
       context: context,
-      title: 'Cripto',
+      title: l10n.selectCryptoCurrency,
       isCrypto: isCrypto,
       selectedCurrency: currentCurrency,
       onCurrencySelected: (currency) {
@@ -193,10 +196,11 @@ class _CurrencyExchangePageState extends ConsumerState<CurrencyExchangePage> {
   void _showToCurrencyPicker([String currentCurrency = 'VES']) {
     // Determine if current TO currency is crypto
     final isCrypto = currentCurrency == 'USDT' || currentCurrency == 'USDC';
+    final l10n = AppLocalizations.of(context)!;
 
     CurrencyBottomSheet.show(
       context: context,
-      title: 'FIAT',
+      title: l10n.selectFiatCurrency,
       isCrypto: isCrypto,
       selectedCurrency: currentCurrency,
       onCurrencySelected: (currency) {

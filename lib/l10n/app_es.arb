@@ -1,0 +1,77 @@
+{
+  "@@locale": "es",
+  "appTitle": "Currency Exchange",
+  "@appTitle": {
+    "description": "Título de la aplicación"
+  },
+  "tengo": "TENGO",
+  "@tengo": {
+    "description": "Etiqueta para la moneda origen"
+  },
+  "quiero": "QUIERO",
+  "@quiero": {
+    "description": "Etiqueta para la moneda destino"
+  },
+  "amountHint": "0.00",
+  "@amountHint": {
+    "description": "Texto de ayuda para el campo de cantidad"
+  },
+  "estimatedRate": "Tasa estimada",
+  "@estimatedRate": {
+    "description": "Etiqueta para la tasa de cambio estimada"
+  },
+  "youWillReceive": "Recibirás",
+  "@youWillReceive": {
+    "description": "Etiqueta para la cantidad que recibirá"
+  },
+  "estimatedTime": "Tiempo estimado",
+  "@estimatedTime": {
+    "description": "Etiqueta para el tiempo estimado de la transacción"
+  },
+  "exchangeButton": "Cambiar",
+  "@exchangeButton": {
+    "description": "Texto del botón para realizar el cambio"
+  },
+  "selectCryptoCurrency": "Cripto",
+  "@selectCryptoCurrency": {
+    "description": "Título para seleccionar criptomoneda"
+  },
+  "selectFiatCurrency": "FIAT",
+  "@selectFiatCurrency": {
+    "description": "Título para seleccionar moneda fiat"
+  },
+  "errorFetchingRate": "Error al obtener la tasa de cambio",
+  "@errorFetchingRate": {
+    "description": "Mensaje de error genérico"
+  },
+  "serverError": "Error del servidor ({statusCode}). Por favor intenta de nuevo.",
+  "@serverError": {
+    "description": "Error del servidor",
+    "placeholders": {
+      "statusCode": {
+        "type": "int",
+        "example": "500"
+      }
+    }
+  },
+  "connectionTimeout": "Tiempo de espera agotado. Verifica tu conexión.",
+  "@connectionTimeout": {
+    "description": "Error de timeout de conexión"
+  },
+  "connectionError": "Error de conexión. Verifica tu red.",
+  "@connectionError": {
+    "description": "Error de conexión"
+  },
+  "invalidAmount": "Por favor ingresa una cantidad válida",
+  "@invalidAmount": {
+    "description": "Error cuando la cantidad no es válida"
+  },
+  "noRatesAvailable": "No hay tasas de cambio disponibles para esta combinación de monedas",
+  "@noRatesAvailable": {
+    "description": "Error cuando no hay tasas disponibles"
+  },
+  "approximateSymbol": "≈",
+  "@approximateSymbol": {
+    "description": "Símbolo de aproximadamente"
+  }
+}
