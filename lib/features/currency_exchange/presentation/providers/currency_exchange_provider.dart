@@ -196,11 +196,25 @@ class CurrencyExchangeNotifier extends _$CurrencyExchangeNotifier {
         exchangeRate: result,
       );
     } catch (e) {
+      var errorMessage = 'Error al obtener la tasa de cambio';
+
+      if (e is DioException) {
+        if (e.response != null) {
+          errorMessage =
+              'Error del servidor (${e.response!.statusCode}). Por favor intenta de nuevo.';
+        } else if (e.type == DioExceptionType.connectionTimeout ||
+            e.type == DioExceptionType.receiveTimeout) {
+          errorMessage = 'Tiempo de espera agotado. Verifica tu conexión.';
+        } else if (e.type == DioExceptionType.connectionError) {
+          errorMessage = 'Error de conexión. Verifica tu red.';
+        }
+      }
+
       state = CurrencyExchangeState.error(
         fromCurrency: fromCurrency,
         toCurrency: toCurrency,
         amount: amount,
-        message: e.toString(),
+        message: errorMessage,
       );
     }
   }

@@ -34,15 +34,17 @@ class _CurrencyExchangePageState extends ConsumerState<CurrencyExchangePage> {
         title: const Text('Currency Exchange'),
       ),
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(24),
-          child: Column(
-            children: [
-              // Main Card
-              Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(24),
-                  child: Column(
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(24),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                // Main Card
+                Card(
+                  child: Padding(
+                    padding: const EdgeInsets.all(24),
+                    child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       // Currency Selector
@@ -165,7 +167,8 @@ class _CurrencyExchangePageState extends ConsumerState<CurrencyExchangePage> {
                   ),
                 ),
               ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

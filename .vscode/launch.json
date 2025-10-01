@@ -1,0 +1,53 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Flutter (Android Emulator)",
+      "type": "dart",
+      "request": "launch",
+      "program": "lib/main.dart",
+      "flutterMode": "debug",
+      "deviceId": "emulator-5554"
+    },
+    {
+      "name": "Flutter (iOS Simulator)",
+      "type": "dart",
+      "request": "launch",
+      "program": "lib/main.dart",
+      "flutterMode": "debug",
+      "deviceId": "0E791949-6F1E-415B-AC51-D5A05254E550"
+    },
+    {
+      "name": "Flutter (Profile - Android)",
+      "type": "dart",
+      "request": "launch",
+      "program": "lib/main.dart",
+      "flutterMode": "profile",
+      "deviceId": "emulator-5554"
+    },
+    {
+      "name": "Flutter (Profile - iOS)",
+      "type": "dart",
+      "request": "launch",
+      "program": "lib/main.dart",
+      "flutterMode": "profile",
+      "deviceId": "0E791949-6F1E-415B-AC51-D5A05254E550"
+    },
+    {
+      "name": "Flutter (Release - Android)",
+      "type": "dart",
+      "request": "launch",
+      "program": "lib/main.dart",
+      "flutterMode": "release",
+      "deviceId": "emulator-5554"
+    },
+    {
+      "name": "Flutter (Release - iOS)",
+      "type": "dart",
+      "request": "launch",
+      "program": "lib/main.dart",
+      "flutterMode": "release",
+      "deviceId": "0E791949-6F1E-415B-AC51-D5A05254E550"
+    }
+  ]
+}
