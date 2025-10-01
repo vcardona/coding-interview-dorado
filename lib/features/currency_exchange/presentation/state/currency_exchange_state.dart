@@ -7,7 +7,7 @@ part 'currency_exchange_state.freezed.dart';
 class CurrencyExchangeState with _$CurrencyExchangeState {
   const factory CurrencyExchangeState.initial({
     @Default('USDT') String fromCurrency,
-    @Default('VES') String toCurrency,
+    @Default('COP') String toCurrency,
     @Default(0.0) double amount,
   }) = _Initial;
 

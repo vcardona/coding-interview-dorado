@@ -200,7 +200,11 @@ class CurrencyExchangeNotifier extends _$CurrencyExchangeNotifier {
         amount: amount,
         exchangeRate: result,
       );
-    } catch (e) {
+    } catch (e, stackTrace) {
+      // Log the error for debugging
+      print('Error getting exchange rate: $e');
+      print('Stack trace: $stackTrace');
+
       var errorMessage = 'Error al obtener la tasa de cambio';
 
       if (e is DioException) {
@@ -213,6 +217,9 @@ class CurrencyExchangeNotifier extends _$CurrencyExchangeNotifier {
         } else if (e.type == DioExceptionType.connectionError) {
           errorMessage = 'Error de conexión. Verifica tu red.';
         }
+      } else if (e is Exception) {
+        // Handle our custom exception from repository
+        errorMessage = e.toString().replaceAll('Exception: ', '');
       }
 
       state = CurrencyExchangeState.error(

@@ -26,9 +26,25 @@ class ExchangeRateDataModel with _$ExchangeRateDataModel {
 @freezed
 class ByPriceModel with _$ByPriceModel {
   const factory ByPriceModel({
-    double? fiatToCryptoExchangeRate,
+    @_ExchangeRateConverter() double? fiatToCryptoExchangeRate,
   }) = _ByPriceModel;
 
   factory ByPriceModel.fromJson(Map<String, dynamic> json) =>
       _$ByPriceModelFromJson(json);
+}
+
+// Custom converter to handle String or num for exchange rate
+class _ExchangeRateConverter implements JsonConverter<double?, dynamic> {
+  const _ExchangeRateConverter();
+
+  @override
+  double? fromJson(dynamic value) {
+    if (value == null) return null;
+    if (value is num) return value.toDouble();
+    if (value is String) return double.tryParse(value);
+    return null;
+  }
+
+  @override
+  dynamic toJson(double? value) => value;
 }
