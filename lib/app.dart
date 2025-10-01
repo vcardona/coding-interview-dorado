@@ -25,6 +25,7 @@ class MyApp extends ConsumerWidget {
       supportedLocales: const [
         Locale('es'), // Spanish
         Locale('en'), // English
+        Locale('pt'), // Portuguese
       ],
     );
   }
