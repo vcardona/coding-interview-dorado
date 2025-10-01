@@ -2,8 +2,12 @@
 
 Aplicación móvil de calculadora de cambio de divisas desarrollada en Flutter, que permite conversiones entre criptomonedas (CRYPTO) y monedas fiat (FIAT) en tiempo real.
 
+## 📱 Estado Actual de la Aplicación
+
 <p align="center">
-  <img src="assets/screen_1.jpg" alt="Currency Exchange App Screenshot" width="300"/>
+  <img src="assets/Exchange.png" alt="Currency Exchange App - Estado Actual" width="300"/>
+  <br>
+  <em>Implementación actual en el branch <code>development</code></em>
 </p>
 
 ## 📋 Tabla de Contenidos
